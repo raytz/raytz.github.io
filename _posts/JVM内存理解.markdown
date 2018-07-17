@@ -1,4 +1,7 @@
-#  Java内存结构
+#  在Java里，描述int和Integer的内存占用差别
+
+想清楚描述这个问题，咱们先来聊聊Java内存
+
 ## Java内存分为5个虚拟区域
 
 ![avatar](https://raw.githubusercontent.com/raytz/raytz.github.io/master/_data/20141021141849_243.jpg)
@@ -39,21 +42,23 @@
 * 在当前命令执行完，PC寄存器会保存下一个执行执行的地址。
 
 
-# 一个Integer的内存占用
 ## Java对象的内存布局
 * 类加载检查
-JVM遇到一条new指令时，首先检查这个指令的参数是否能在常量池中定位到一个类的符号引用，并且检查这个符号引用代表的类是否已被加载、解析和初始化过。如果没有，那必须先执行相应的类的加载过程ClassLoader。
+> JVM遇到一条new指令时，首先检查这个指令的参数是否能在常量池中定位到一个类的符号引用，并且检查这个符号引用代表的类是否已被加载、解析和初始化过。如果没有，那必须先执行相应的类的加载过程ClassLoader。
 
 * 对象头（Header）
 > 在32位系统上占用8bytes，在64位系统上占用16bytes
-> 包括了mark word和klass pointer
-> markWord在32位系统上占用了4bytes，64位系统占用了8bytes，包括了哈希码、GC分代年龄、锁状态标志、线程持有锁、偏向线程ID、偏向时间戳
+> 包括了MarkWord和KlassPointer
 > 
-> klass pointer
-> 类元数据指针，可以理解成类的Description
-> 
+
+> MarkWord在32位系统上占用了4bytes，64位系统占用了8bytes，包括了哈希码、GC分代年龄、锁状态标志、线程持有锁、偏向线程ID、偏向时间戳
+
+
 ![avatar](https://raw.githubusercontent.com/raytz/raytz.github.io/master/_data/20151217151455512.jpeg)
 
+> KlassPointer:
+> 类元数据指针，一个指向Metadata的类描述指针
+> 
   
 * 实例数据（Instance Data）
 > 原始类型 Primitive type 内存占用如下:
@@ -83,6 +88,20 @@ double | 8
 * class A { Integer a; } : Header 16 + Reference 8 = 24
 * new Integer[1] : Header 24 + Refrence 8 = 32
 
+* <a href="#mark1" target="_self">注1</a>
+
+### int的内存占用
+	int a = 1;
+
+在线程栈上申请8个字节空间，存放1的值，占用的是JvmStack内存
+
+
+### Integer的内存占用
+	Integer a = new Integer(1);
+
+new Integer(1) : Header 16 + int 4 + padding 4 = 28字节堆内存
+在线程上申请8个字节控件，存放new Integer对象堆地址
+
 
 ## Jvm启动的时候内存占用
 1. Java程序的堆内存，最大就是 -Xmx设置的这个值
@@ -96,6 +115,9 @@ double | 8
 
 ## 参考链接
 https://stackoverflow.com/questions/26357186/what-is-in-java-object-header
+
+## 备注
+<span id="mark1"><font color="red">本文不讨论指针压缩 -XX:UseCompressedOops</font></span>
 
 
 

@@ -1,0 +1,33 @@
+#一.前言
+## 最近遇到一些网络问题，查找到了一些资料，正好做一些笔记记录过程
+
+
+### 1. ARP协议
+#### 三个关键概念
+
+* ARP（Address Resolution Protocol）即地址解析协议， 用于实现从 IP 地址到 MAC 地址的映射，即询问目标IP对应的MAC地址。
+
+* 在网络通信中，主机和主机通信的数据包需要依据OSI模型从上到下进行数据封装，当数据封装完整后，再向外发出。所以在局域网的通信中，不仅需要源目IP地址的封装，也需要源目MAC的封装。
+
+* 一般情况下，上层应用程序更多关心IP地址而不关心MAC地址，所以需要通过ARP协议来获知目的主机的MAC地址，完成数据封装。
+
+
+他主要是两个命令：
+
+1. Who has 
+2. is at
+
+形成一问一答
+
+
+![avatar](https://raw.githubusercontent.com/raytz/raytz.github.io/master/_data/WX20180717-123338.png)
+
+
+# 一些命令
+远程捉包并且实时转发到本机上
+	
+	ssh 目标机器 "sudo tcpdump -s 0 -U -n -i eth0 port not 22 -w -" | wireshark -k -i -
+
+# 参考资料
+
+<a href=https://zhuanlan.zhihu.com/p/28771785>图解ARP协议（一）</a>
