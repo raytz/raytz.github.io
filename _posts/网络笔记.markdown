@@ -62,17 +62,41 @@
 
 ## 2.2. ICMP协议例子：Ping
 
+ping这个单词源自声纳定位，而这个命令的作用也确实如此
+
+
 如下图：
 
 
 ![avatar](https://raw.githubusercontent.com/raytz/raytz.github.io/master/_data/WX20180717-200348@2x.png)
 
-可以看到，一次ping由request和reply组成
+可以看到，一次ping由request (Type 8) 和reply (Type 0) 组成
 
 ## 2.3. ICMP协议例子：Traceroute
 
-![avatar](https://raw.githubusercontent.com/raytz/raytz.github.io/master/_data/WX20180718-141839.png)
+顾名思义：路由跟踪。他是怎么做到的呢？
 
+以下一次traceroute的完整捉包
+
+![avatar](https://raw.githubusercontent.com/raytz/raytz.github.io/master/_data/WX20180718-142749.png)
+
+
+可以看出，traceroute利用TTL的特点，逼迫路由应答Time-to-Live exceeded从而知道了路由器的ip地址
+> traceroute发出TTL=1的UDP包到目的地址
+> 
+> 第一个路由进行TTL-1，发现是0，应答ICMP，Time-to-Live exceeded
+> traceroute就知道了第一个路由的地址
+> 
+> 继续发出TTL=2的UDP包到目的地址
+> 第一个路由进行TTL-1，发现是1，继续发往下一级路由
+> 第二级路由进行TTL-1，发现是0，应答ICMP，Time-to-Live exceeded
+> traceroute知道了第二个路由的地址
+> 
+> 重复直到到达目的地
+> 
+> 
+
+注：出于安全性考虑，大多数防火墙默认不返回ICMP报文，因此traceroute不一定能得到沿途所有的路由地址。
 
 # 一些命令
 远程捉包并且实时转发到本机上
@@ -89,3 +113,5 @@
 
 
 <a href=https://zh.wikipedia.org/zh-hans/Ping>Ping</a>
+
+<a href=https://zh.wikipedia.org/wiki/Traceroute>Traceroute</a>
