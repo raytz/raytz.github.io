@@ -1,107 +1,34 @@
-# ---------------- #
-#   Main Configs   #
-# ---------------- #
-baseurl:
-url: http://raytz.github.io
-date_format: "ordinal"
-title: A Coder
-subtitle: "CodeLess. CreateMore. DeployEverywhere"
-description: "Junwen.Wu的个人博客"
-keywords: 
-favicon: /favicon.ico
-timezone: Asia/Beijing
-encoding: "utf-8"
-side_bar_repo_limit: 5
+safe: false
+permalink: /posts/:title.html
+exclude:
+  - README.md
 
-# ---------------- #
-#      Author      #
-# ---------------- #
-author: Junwen.Wu
-organization: raytz.github.io
-organization_url: http://raytz.github.io
-github_username: raytz
-location: Beijing, China
-email: Raymond_ng@qq.com
+name: 天恩与天泽
+host: localhost
+desc: 别怕困难，方法总比困难多
 
-# ---------------- #
-#    Navigation    #
-# ---------------- #
-navs:
-  -
-    href: /
-    label: 首页
+custom:
+    category:
+        default: 默认分类
+        another: Another Category
+    categories:
+      - name:  default
+        title: 随笔
 
-  -
-    href: /categories/
-    label: 分类
+      - name:  Java
+        title: Java
 
-  -
-    href: /wiki/
-    label: 维基
+    scrollingLoadCount: 2                          # 滚屏自动加载文章数量，“0”为关闭
 
-  -
-    href: /links/
-    label: 链接
+meta:
+    author:
+        name: raytz
+        email: raymond_ng@qq.com
+        disqus: raytz              # Disqus缩略标识
+        # gcse:      # Google自定义搜索标识ID
+        github: raymond.ng.gz@gmail.com                 # GitHub账号
+        gravatar:   # Gravatar头像标识
 
-  -
-    href: /about/
-    label: 关于
-
-# ---------------- #
-#       RSS        #
-# ---------------- #
-subscribe_rss: /feed.xml
-
-# ---------------- #
-#      Jekyll      #
-# ---------------- #
-markdown: kramdown
-kramdown:
-    input: GFM
-highlighter: rouge
-paginate: 8
-lsi: false
-quiet: false
-excerpt_separator: "\n\n"
-permalink: /:year/:month/:day/:title/
-plugins:
-    - jekyll-github-metadata
-    - rouge
-#     - jekyll-html-pipeline
-    - jekyll-paginate
-    - jekyll-sitemap
-    - jekyll-feed
-    # - jemoji
-    # - jekyll-mentions
-collections:
-    wiki:
-        output: true
-        permalink: /wiki/:path/
-
-repository: raytz/raytz.github.io
-
-# ---------------- #
-#      Comments    #
-# ---------------- #
-# support provider: disqus, gitment
-comments_provider: gitment
-# !!!重要!!! 请修改下面这些信息为你自己申请的
-# !!!Important!!! Please modify infos below to yours
-# https://disqus.com
-disqus:
-    username: raytz
-# https://imsun.net/posts/gitment-introduction/
-gitment:
-    owner: raytz
-    repo: blog-comments
-    oauth:
-        client_id: f8f1b59032ce5047447f
-        client_secret: d435c9b4492b2a84fc1a9182e2e56f8550b6b811
-# 在使用其它评论组件时可点击显示 Disqus
-lazy_load_disqus : true
-
-# ---------------- #
-#    Analytics     #
-# ---------------- #
-google:
-    analytics_id: UA-111892789-1
+    disqus: disqus.com/embed.js                     # Disqus评论的JS地址
+    gapi: http://www.google.com/jsapi               # Google API地址
+    gravatar: http://en.gravatar.com/avatar/        # Gravatar头像服务器地址
