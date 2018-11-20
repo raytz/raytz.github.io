@@ -114,7 +114,8 @@ new Integer(1) : Header 16 + int 4 + padding 4 = 28字节堆内存
 
 
 ## 参考链接
-https://stackoverflow.com/questions/26357186/what-is-in-java-object-header
+<a href=https://stackoverflow.com/questions/26357186/what-is-in-java-object-header>stackoverflow：二叉查找数</a>
+
 
 ## 备注
 <span id="mark1"><font color="red">本文不讨论指针压缩 -XX:UseCompressedOops</font></span>
